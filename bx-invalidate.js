@@ -57,4 +57,10 @@ function validateMe(formname){
     }else{
         return true; //
     }
+    
+    
+   //FORCEFUL VALIDATEION
+    jQuery('form[name='+formname+']:visible .number').keyup(function(){ 
+        this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
 }
