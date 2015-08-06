@@ -76,19 +76,20 @@ function validateMe(formname){
         }
     });
     
-    
+   
     
     //Check loop
     if($('form[name='+formname+']:visible .bx-error').length > 0){
         return false; //Stop form completely
     }else{
         var call = $('form[name='+formname+']:visible').attr('callback');
-        
         //alert($(this).attr('callback'));
-        if(call != null && call != ''){
-            window[call](formname);
+        if(call == null || call == '' || call == undefined){
+            //alert('form[name='+formname+']:visible');
+            //$('form[name='+formname+']:visible').submit();
+            document.forms[formname].submit();
         }else{
-            $('form[name='+formname+']:visible').submit();
+            window[call](formname);
         }
     }
 }
