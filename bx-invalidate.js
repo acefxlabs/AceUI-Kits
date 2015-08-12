@@ -89,7 +89,12 @@ function validateMe(formname){
             //$('form[name='+formname+']:visible').submit();
             document.forms[formname].submit();
         }else{
-            window[call](formname);
+            //window[call](formname);
+            var fnstring = call;
+            var fnparams = [formname];
+            var fn = window[fnstring];
+            
+            if (typeof fn === "function") fn.apply(null, fnparams);
         }
     }
 }
