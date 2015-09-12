@@ -67,6 +67,12 @@ function validateMe(formname){
     
     //Number
     $('form[name='+formname+']:visible .number').each(function(){
+        var inputtype = $(this).attr('type');
+        //Enforce input type to be text to ensure maximal functionality
+        if(inputtype == 'number'){
+            $(this).attr('type', 'text');
+        }
+        
         $(this).next('.bx-error').remove();
         var num = $(this).val();
         if(isNaN(num) || num == ''){
