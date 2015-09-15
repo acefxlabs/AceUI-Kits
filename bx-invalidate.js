@@ -82,6 +82,19 @@ function validateMe(formname){
         }
     });
     
+    //Equal to
+    $('form[name='+formname+']:visible .equalto').each(function(){
+        var equal = $(this).attr('equals'); //Targetted field
+        var mydata = $(this).val(); 
+        
+        if(mydata != $('#'+equal).val()){
+            $(this).after('<div class="smfont red-text tright left full bx-error">Field data is not equal to related</div>');
+        }else{
+            $(this).next('.bx-error').remove();
+        }
+        
+    });
+    
    
     
     //Check loop
