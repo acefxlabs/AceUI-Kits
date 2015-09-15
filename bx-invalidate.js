@@ -84,10 +84,12 @@ function validateMe(formname){
     
     //Equal to
     $('form[name='+formname+']:visible .equalto').each(function(){
+        $(this).parent().find('.bx-error').remove();
         var equal = $(this).attr('equals'); //Targetted field
         var mydata = $(this).val(); 
-        
-        if(mydata != $('#'+equal).val()){
+        if(mydata == ''){
+            $(this).after('<div class="smfont red-text tright left full bx-error">This field must not be empty</div>');
+        }else if(mydata != $('#'+equal).val()){
             $(this).after('<div class="smfont red-text tright left full bx-error">Field data is not equal to related</div>');
         }else{
             $(this).next('.bx-error').remove();
