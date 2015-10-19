@@ -32,6 +32,14 @@ $('body').on('keydown', '.validateMe:visible .number', function(e){
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
+}).on('keyup', '.validateMe:visible .money', function(){
+
+    var re = /[a-zA-Z ]/i;
+    var money  = $(this).val();
+    nx = money.replace(re, '');
+    alert(nx);
+    $(this).val(nx);
+
 }).on('submit', '.validateMe:visible', function(evt){
     evt.preventDefault();
     var formname = $(this).attr('name');
