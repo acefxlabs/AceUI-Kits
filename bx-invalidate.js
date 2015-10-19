@@ -37,7 +37,6 @@ $('body').on('keydown', '.validateMe:visible .number', function(e){
     var re = /[a-zA-Z ]/i;
     var money  = $(this).val();
     nx = money.replace(re, '');
-    alert(nx);
     $(this).val(nx);
 
 }).on('submit', '.validateMe:visible', function(evt){
@@ -89,6 +88,22 @@ function validateMe(formname){
             $(this).next('.bx-error').remove();
         }
     });
+    
+    
+    //money
+    //Number
+    $('form[name='+formname+']:visible .money').each(function(){
+        $(this).next('.bx-error').remove();
+        var money = $(this).val();
+        var re = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/i;
+
+        if(re.test(money) == false){
+           $(this).after('<div class="smfont red-text tright left full bx-error">Invalid money format</div>');
+        }else{
+            $(this).next('.bx-error').remove();
+        }
+    });
+    
     
     //Equal to
     $('form[name='+formname+']:visible .equalto').each(function(){
