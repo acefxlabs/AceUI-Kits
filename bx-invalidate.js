@@ -105,19 +105,19 @@ function validateMe(formname){
     });
     
     
-    //Equal to
-    $('form[name='+formname+']:visible .equalto').each(function(){
-        $(this).parent().find('.bx-error').remove();
-        var equal = $(this).attr('equals'); //Targetted field
-        var mydata = $(this).val(); 
-        if(mydata == '' && $('#'+equal).hasClass('required')){
-            $(this).after('<div class="smfont red-text tright left full bx-error">This field must not be empty</div>');
-        }else if(mydata != $('#'+equal).val()){
-            $(this).after('<div class="smfont red-text tright left full bx-error">Field data is not equal to related</div>');
+    //Equalize fields
+    jQuery('form[name='+formname+']:visible .equalto').each(function(){
+        jQuery(this).next('.bx-error').remove();
+        var data = jQuery(this).val();
+        var target = jQuery(this).attr('equalto');
+        var targetVal = jQuery('form[name='+formname+']:visible #'+target).val();
+
+        if(data == targetVal && data != ''){
+            jQuery(this).next('.bx-error').remove();
         }else{
-            $(this).next('.bx-error').remove();
+            jQuery(this).after('<div class="smfont red-text tright left full bx-error">Value of field is not corresponding</div>');
         }
-        
+
     });
     
    
