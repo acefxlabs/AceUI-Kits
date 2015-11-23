@@ -96,7 +96,7 @@ function validateMe(formname){
         jQuery(this).next('.bx-error').remove();
 
         var email = jQuery(this).val();
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)jQuery/i;
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
         if(re.test(email) == false){
             jQuery(this).after('<div class="smfont red-text tright left full bx-error">Invalid email format</div>');
@@ -121,7 +121,7 @@ function validateMe(formname){
     jQuery('form[name='+formname+']:visible .money').each(function(){
         jQuery(this).next('.bx-error').remove();
         var money = jQuery(this).val();
-        var re = /(?=.)^\jQuery?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?jQuery/;
+        var re = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
 
         if(re.test(money) == false){
            jQuery(this).after('<div class="smfont red-text tright left full bx-error">Invalid money format</div>');
