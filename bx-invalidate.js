@@ -2,6 +2,7 @@
  * Copyright 2015 - BoxedAll Platforms
  * https://boxedall.com
  * This script is written for all lovers of the web who belives things should be done easily without stress
+ * Used jQuery but forced $ to jQuery to avoid conflict
  */
 
 jQuery(document).ready(function(){
