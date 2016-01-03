@@ -62,7 +62,7 @@ jQuery('body').on('keydown', '.validateMe:visible .number', function(e){
 function validateMe(formname){
 
     //Gneeral Validation to ensure it is filled
-    jQuery('form[name='+formname+']:visible .required').each(function(){
+    jQuery('form[name='+formname+']:visible .required:visible').each(function(){
         jQuery(this).next('.bx-error').remove();
         //var toPranet = jQuery(this).parent('.item');
         if(jQuery(this).val() == '' || jQuery(this).val() === null){
@@ -74,7 +74,7 @@ function validateMe(formname){
 
 
     //Equalize fields
-    jQuery('form[name='+formname+']:visible .equalto').each(function(){
+    jQuery('form[name='+formname+']:visible .equalto:visible').each(function(){
         jQuery(this).next('.bx-error').remove();
         var data = jQuery(this).val();
         var target = jQuery(this).attr('equalto');
@@ -91,7 +91,7 @@ function validateMe(formname){
 
 
     //Email
-    jQuery('form[name='+formname+']:visible .email').each(function(){
+    jQuery('form[name='+formname+']:visible .email:visible').each(function(){
 
         jQuery(this).next('.bx-error').remove();
 
@@ -106,7 +106,7 @@ function validateMe(formname){
     });
 
     //Number
-    jQuery('form[name='+formname+']:visible .number').each(function(){
+    jQuery('form[name='+formname+']:visible .number:visible').each(function(){
         jQuery(this).next('.bx-error').remove();
         var num = jQuery(this).val();
         if(isNaN(num) || num == '' || num === null){
@@ -118,7 +118,7 @@ function validateMe(formname){
 
 
     //Number Money
-    jQuery('form[name='+formname+']:visible .money').each(function(){
+    jQuery('form[name='+formname+']:visible .money:visible').each(function(){
         jQuery(this).next('.bx-error').remove();
         var money = jQuery(this).val();
         var re = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
@@ -172,7 +172,7 @@ function validateMe(formname){
 
 	jQuery.formatCurrency = {};
 
-	jQuery.formatCurrency.regions = [];
+	jQuery.formatCurrency.regions = []; 
 
 	// default Region is en
 	jQuery.formatCurrency.regions[''] = {
