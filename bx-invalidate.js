@@ -130,6 +130,19 @@ function validateMe(formname){
         }
     });
 
+    // Compare Value
+    jQuery('form[name='+formname+']:visible .compare:visible').each(function(){
+        jQuery(this).next('.bx-error').remove();
+        var targ = jQuery(this).attr('compare');
+        var el = jQuery('form[name='+formname+'] .required[name='+targ+']');
+
+        if(jQuery(this).val() !== el.val()){
+           jQuery(this).after('<div class="smfont red-text tright left full bx-error">The Comparing Feild value does not match</div>');
+        }else{
+            jQuery(this).next('.bx-error').remove();
+        }
+    });
+
 
 
 
@@ -172,7 +185,7 @@ function validateMe(formname){
 
 	jQuery.formatCurrency = {};
 
-	jQuery.formatCurrency.regions = []; 
+	jQuery.formatCurrency.regions = [];
 
 	// default Region is en
 	jQuery.formatCurrency.regions[''] = {
