@@ -1,5 +1,5 @@
 /*!
- * ValidateMe
+ * AceUI Kit
  * (c) 2020 Abayomi Oyewumi, MIT License, https://gomakethings.com
  * Desc : InvalidateJS is a inline form Validation Plugin, the essense of this is to enable form validation without hiccups
  * This Plugin require no Javascript Framework or Library
