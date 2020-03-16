@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+      <head>
+            <meta charset="utf-8">
+            <title></title>
+
+            <link rel="stylesheet" href="bootstrap.css">
+            <style media="screen">
+                  .clear{
+                        clear : both;
+                        width : 100%;
+                        height : 1px;
+                  }
+            </style>
+
+      </head>
+      <body>
+            <div class="container" style="padding: 25px; ">
+                  <div class="row">
+                        <h3 class="text-center text-danger" style="width: 100%;">Validate Form</h3>
+                        <br class="clear"/>
+                        <div class="col-12">
+                              <form class="aceUIValidate" class="">
+                                    <div class="form-group">
+                                          <label>Normal Text</label>
+                                          <input type="text" name="text" class="form-control required"/>
+                                    </div>
+                                    <div class="form-group">
+                                          <label>Email</label>
+                                          <input type="text" name="email" class="form-control required email"/>
+                                    </div>
+                                    <div class="form-group">
+                                          <label>Number</label>
+                                          <input type="text" name="number" class="form-control required number"/>
+                                    </div>
+                                    <div class="form-group">
+                                          <br class="clear"/>
+                                          <button type="submit" name="button" class="btn btn-success btn-block">Submit</button>
+                                    </div>
+                              </form>
+                        </div>
+                  </div>
+            </div>
+
+            <script src="../aceUIKits.js" charset="utf-8"></script>
+      </body>
+</html>

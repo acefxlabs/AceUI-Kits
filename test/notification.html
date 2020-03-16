@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+      <head>
+            <meta charset="utf-8">
+            <title>Notificaion</title>
+
+            <link rel="stylesheet" href="bootstrap.css">
+            <style media="screen">
+                  .clear{
+                        clear : both;
+                        width : 100%;
+                        height : 1px;
+                  }
+            </style>
+
+      </head>
+      <body>
+            <div class="container" style="padding: 25px; ">
+                  <div class="row">
+                        <div class="col-sm-12">
+                              <h3 class="text-center text-danger" style="width: 100%;">NOTIFICATION</h3>
+                              <br class="clear"/>
+                              <input type="text" name="text" id="text" class="form-control" value="Enter What you want to see Here....">
+                              <br class="clear"/>
+                        </div>
+                        <div class="col-sm-4">
+                              <button type="button" id="warning" class="showMessage btn btn-block btn-warning">Show Warning Message</button>
+                        </div>
+                        <div class="col-sm-4">
+                              <button type="button" id="error"  class="showMessage btn btn-block btn-danger">Show Error Message</button>
+                        </div>
+                        <div class="col-sm-4">
+                              <button type="button" id="success" class="showMessage btn btn-block btn-success">Show Success Message</button>
+                        </div>
+                  </div>
+            </div>
+
+            <script src="../aceUIKits.js" charset="utf-8"></script>
+            <script>
+                  document.addEventListener('click', e => {
+                        let elm = e.target;
+                        if(elm.classList.contains('showMessage')){
+                              let id = elm.id;
+                              let text = document.querySelector('#text').value;
+                              let code;
+
+                              switch (id) {
+                                    case 'warning':
+                                          code = 0;
+                                          break;
+
+                                    case 'error':
+                                          code = 2;
+                                          break;
+
+                                    case 'success':
+                                          code = 1;
+                                          break;
+                              }
+
+                              aceUIStripMessage(text, code);
+
+                        }
+                  })
+            </script>
+      </body>
+</html>
