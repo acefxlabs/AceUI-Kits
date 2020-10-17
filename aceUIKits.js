@@ -8,6 +8,9 @@
 //TODO : Restrict Number Field or Required Number from Accepting Text
 //TODO : Money Validation (format Money Alternative)
 //TODO : EqualTo Validation
+if(typeof _a === 'undefined'){
+    window['_a'] = {};
+}
 
 //If Element Contain Children Nodes
 const aceUIValidateErrorNode = (elm, message) => {
@@ -58,7 +61,7 @@ const aceUIValidateEventsListener = form => {
       let errorMsg = form.querySelectorAll('.aceUIValidateErrorMessage');
 
       if (errorState.length === 0 && errorMsg.length === 0) {
-            window[callBack](form, serializeData = aceUIValidateSerializedToObject(form));
+            window._a[callBack](form, serializeData = aceUIValidateSerializedToObject(form));
       }
 
 }
@@ -68,9 +71,14 @@ const aceUIValidateElement = elm => {
       let validReq = elm.classList;
 
       //Validate General
-      if (validReq.contains('required') && elm.value === '' || elm.value.trim() === '' && !validReq.contains('aceUIValidateError')) {
-            aceUIValidateErrorNode(elm, 'This field is required');
-            return false;
+      if (validReq.contains('required')) {
+          if(elm.value === '' || elm.value.trim() === '' && !validReq.contains('aceUIValidateError')){
+              aceUIValidateErrorNode(elm, 'This field is required');
+              return false;
+          }else{
+              aceUIValidateRemoveErrorNode(elm);
+          }
+
       } else {
             aceUIValidateRemoveErrorNode(elm);
       }
@@ -78,11 +86,18 @@ const aceUIValidateElement = elm => {
       //Email Validation
       if (validReq.contains('email') && !validReq.contains('aceUIValidateError')) {
 
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(elm.value) === true) {
-                  aceUIValidateRemoveErrorNode(elm);
-            } else {
-                  aceUIValidateErrorNode(elm, 'Content not a valid Email');
-                  return false;
+            //If Empty Ignore if email is defined
+            // if(elm.value === "" || !elm.classList.contains('required')){
+            if(elm.value === ""){
+
+            }else{
+
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(elm.value) === true) {
+                      aceUIValidateRemoveErrorNode(elm);
+                } else {
+                      aceUIValidateErrorNode(elm, 'Content not a valid Email');
+                      return false;
+                }
             }
       }
 
@@ -148,7 +163,7 @@ function aceUIShade(targetElm, message) {
             aceUIShadeMessage.innerHTML = message;
             aceUIShadeBlock.append(aceUIShadeMessage);
 
-            aceUIShadeMessage.style.left = `calc( 50% - 155px )`;
+            aceUIShadeMessage.style.left = `calc( 50% - 125px )`;
             aceUIShadeMessage.style.top = `calc( 50% - 35px )`;
       }
 }
@@ -189,34 +204,39 @@ function aceUIStripMessage(message, status) {
       notificationStrip.querySelector('.container').innerHTML = message;
 
       let notificationStripHeight = notificationStrip.offsetHeight;
+      // console.log(notificationStripHeight);
       // notificationStrip.style.display = 'none';
-      let cnt = 0;
+      let cnt = Number(notificationStrip.offsetTop);
+      // console.log(notificationStrip.offsetTop);
 
-      let fadeIn = setInterval(() => {
-            cnt = cnt + 0.1;
-            notificationStrip.style.opacity = cnt;
-            if (cnt >= 1) {
-                  clearInterval(fadeIn);
+      let slideDown = setInterval(() => {
+            cnt = cnt + 5;
+            notificationStrip.style.top = cnt+'px';
+            if (cnt >= 0) {
+                  notificationStrip.style.top = '0px';
+                  clearInterval(slideDown);
 
                   setTimeout(() => {
                         clearaceUIStrip();
-                  }, 4000);
+                  }, 4500);
             }
-      }, 30);
+      }, 20);
 }
 
 //Clear Strip Message
 function clearaceUIStrip() {
       let notificationStrip = document.querySelector('.notificationStrip');
-      let cnt = 1;
+      let cnt = 0;
 
-      let fadeOut = setInterval(() => {
-            cnt = cnt - 0.1;
-            notificationStrip.style.opacity = cnt;
-            if (cnt <= 0) {
-                  clearInterval(fadeOut);
+      notificationStrip.querySelector('.container').innerHTML = "";
+
+      let slideUp = setInterval(() => {
+            cnt = cnt - 5;
+            notificationStrip.style.top = cnt+'px';
+            if (cnt <= -100) {
+                  clearInterval(slideUp);
             }
-      }, 10);
+      }, 20);
 }
 
 
@@ -243,14 +263,14 @@ function clearaceUIStrip() {
                position : relative;
           }
           .aceUIShadeBlock{
-               top : -15px;
-               left : -15px;
-               position : absolute;
+               top : 0px;
+               left : 0px;
+               position : fixed;
                width : 100%;
                height : 100%;
                background : #000;
                opacity : 0.8;
-               z-index : 1000000;
+               z-index : 1000000000;
                border-radius : 3px;
                padding : 15px;
           }
@@ -353,7 +373,35 @@ function clearaceUIStrip() {
             let style = document.createElement('style');
             style.setAttribute('id', 'notificationStrip');
 
-            style.innerHTML = '.notificationStrip{position:fixed;opacity: 0;top:0;z-index:10000000;width:calc(100%);padding:10px 15px;color:#FFF;}.notificationStrip .container{width:calc(100%);text-align:center;font-weight:200;margin:0 12px}.notificationStrip .x{padding:1px 10px;font-weight:100;font-family:sans-serif;font-size:15px;position:absolute;right:5px;top:0;cursor:pointer;margin-top:7px}';
+            style.innerHTML = `
+            .notificationStrip{
+                  position:fixed;
+                  opacity: 1;
+                  top:-100px;
+                  left : 0px;
+                  z-index:1000000100;
+                  width:calc(100%);
+                  padding:10px 15px;
+                  font-weight: 700;
+                  color:#FFF;
+            }
+            .notificationStrip .container{
+                  width:calc(100%);
+                  text-align:center;
+                  font-weight:200;
+                  margin:0 12px
+            }
+            .notificationStrip .x{
+                  padding:1px 10px;
+                  font-weight:100;
+                  font-family:sans-serif;
+                  font-size:15px;
+                  position:absolute;
+                  right:5px;
+                  top:0;
+                  cursor:pointer;
+                  margin-top:7px
+            }`;
 
             document.head.append(style);
 
@@ -361,11 +409,11 @@ function clearaceUIStrip() {
             notificationStrip.classList.add('notificationStrip');
       }
 
-      notificationStrip.innerHTML = '<div class="container"></div><div class="x">x</div>';
+      notificationStrip.innerHTML = '<div class="container">...</div><div class="x">x</div>';
       document.body.prepend(notificationStrip);
 
       notificationStrip.addEventListener('click', (e) => {
-            e.target.style.opacity = 1;
+            e.target.style.opacity = 0;
             clearaceUIStrip();
       });
 })();
